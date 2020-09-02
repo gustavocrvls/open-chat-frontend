@@ -20,7 +20,7 @@ export default function Logon() {
       console.log(response.data);
 
       localStorage.setItem('userId', response.data._id);
-      localStorage.setItem('userUsername', username);
+      localStorage.setItem('username', username);
 
       history.push('/chat');
       
