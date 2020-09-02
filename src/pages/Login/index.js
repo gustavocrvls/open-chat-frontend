@@ -7,17 +7,20 @@ import api from '../../services/api';
 import './styles.css';
 
 export default function Logon() {
-  const [id, setId] = useState('');
+  const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('');
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
     try {
-      const response = await api.post('sessions', { id });
+      const response = await api.post('users/login', { username });
 
-      localStorage.setItem('userId', id);
-      localStorage.setItem('userUsername', response.data.name);
+      console.log(response.data);
+
+      localStorage.setItem('userId', response.data._id);
+      localStorage.setItem('userUsername', username);
 
       history.push('/chat');
       
@@ -33,16 +36,16 @@ export default function Logon() {
           <h1>Faça seu login</h1>
 
           <input
-            placeholder="Sua ID"
-            value={id}
-            onChange={e => setId(e.target.value)}
+            placeholder="Usuário"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
           />
           <button className="button" type="submit">Entrar</button>
 
-          <Link className="back-link" to="/register">
+          {/* <Link className="back-link" to="/register">
             <FiLogIn size={16} color="#E02041" />
             Não tenho cadastro
-          </Link>
+          </Link> */}
         </form>
       </section>
     </div>
