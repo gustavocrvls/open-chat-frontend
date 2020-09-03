@@ -1,6 +1,6 @@
 # OpenChat
 
-Backend da aplicação OpenChat desenvolvida para um desafio utilizando a Stack MERN.
+Frontend da aplicação OpenChat desenvolvida para um desafio utilizando a Stack MERN.
 O App consiste em um chat aberto onde usuários podem se cadastrar e enviar mensages em tempo real.
 
 ![](https://github.com/gustavocrvls/open-chat-frontend/blob/master/public/screenshots/chat_screen.png)
