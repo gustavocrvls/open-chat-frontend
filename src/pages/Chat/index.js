@@ -66,6 +66,17 @@ export default function Chat() {
 
     }, [filterDate, filterUsername, filterOrder]);
 
+    function eraseFilters() {
+        setFilterDate('');
+        setFilterUsername('');
+        setFilterOrder('asc');
+
+        api.post(`messages`, { filterDate, filterUsername, filterOrder })
+            .then(response => {
+                setMessages(response.data);
+            });
+    }
+
     return (
         <div className="container">
 
@@ -89,12 +100,24 @@ export default function Chat() {
                                 : <button type="button" onClick={e => setFilterOrder(e.target.value)} value='asc' id="filterOrder" className="admin--btn">Decrescente</button>
                             }
                         </span>
+                        <span className="form-control">
+                            <label htmlFor="filterUsername">Limpar Filtros:</label>
+                            <button type="button" onClick={eraseFilters} value='asc' id="eraseFilters" className="admin--btn">Limpar Filtros</button>
+                        </span>
                     </AdminTools>
                 </Header>
+
                 <section className="chat-messages" id="chat-messages">
                     {messages.map((message) => (
                         <ul key={message._id}>
-                            <li><strong>{message.userUsername}</strong> - {message.content}</li>
+                            <li style={message.userUsername == username ? { textAlign: 'right' } : {}}>
+                                <div className="message--header">
+                                    {String(new Date(message.createdAt).toLocaleDateString())} - <strong>{message.userUsername}</strong> - {String(new Date(message.createdAt).toLocaleTimeString())}
+                                </div>
+                                <div className="message--body">
+                                    {message.content}
+                                </div>
+                            </li>
                         </ul>
                     ))}
                 </section>
