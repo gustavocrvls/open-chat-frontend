@@ -1,68 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# OpenChat
 
-## Available Scripts
+Backend da aplicação OpenChat desenvolvida para um desafio utilizando a Stack MERN.
+O App consiste em um chat aberto onde usuários podem se cadastrar e enviar mensages em tempo real.
 
-In the project directory, you can run:
+# O projeto
+- [frontend](https://github.com/gustavocrvls/open-chat-frontend)
+- [backend](https://github.com/gustavocrvls/open-chat-backend)
 
-### `yarn start`
+# Perfis de Usuário
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Usuário Padrão: Pode enviar e receber mensagens no grupo.
+- Admin: Pode enviar, receber e filtrar mensagens no grupo.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# Funcionalidades
 
-### `yarn test`
+- Cadastrar usuários.
+- Salvar novas mensagens no banco de dados.
+- Enviar atualizações para o frontend quando uma mensagem for adicionada.
+- Filtrar mensagens.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Instalação
 
-### `yarn build`
+```bash
+> npm install
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Inicialização
+Precisa ter o mongodb rodando na máquina.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+> npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para que se possa usar a aplicação em outros aparelhos além do que ela está sendo executada é necessário que os equipamentos estejam conectados numa rede local, e que se faça a mudança da constante API_URL que se encontra em 'config/index.js' para o IP da máquina na rede.
 
-### `yarn eject`
+# Author
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Gustavo Carvalho Silva - [gustavocrvl42@gmail.com](mailto:gustavocrvl42@gmail.com) 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Melhorias Futuras
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Adicionar autenticação no envio e recebimento das mensagens;
+- Adicionar a autenticação no nas filtragems feitas pelo usuário do tipo Admin;
+- Implementar função de excluir mensagens no perfil de Admin;
+- Criar tela onde usuário admin possa adicionar usuários;
+- Criar campo de senha na tela de login;
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Notas 
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Cadastro
+A aplicação no momento permite que o usuário escolha na tela de cadastro se quer ser um usuário padrão ou um administrador, isso se deu pela necessidade da inserção manual do usuário do tipo administrador no banco, sendo assim, num ambiente de testes é mais simples a utilização dessa escolha.

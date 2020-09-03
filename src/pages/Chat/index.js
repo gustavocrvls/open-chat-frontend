@@ -9,6 +9,7 @@ import './styles.scss';
 import Header from '../../Components/Header';
 import AdminTools from '../../Components/AdminTools';
 import { FiSend } from 'react-icons/fi';
+import { API_URL } from '../../config';
 
 export default function Chat() {
     const [filterDate, setFilterDate] = useState('');
@@ -18,7 +19,7 @@ export default function Chat() {
     const [messageContent, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const ioClient = io.connect("http://10.0.0.108:3333");
+    const ioClient = io.connect(API_URL);
 
     // user data
     const username = localStorage.getItem('username');
@@ -107,7 +108,9 @@ export default function Chat() {
                     </AdminTools>
                 </Header>
 
-                <section className="chat-messages" id="chat-messages">
+                <section className="chat-messages">
+                    <div className="chat-messages-roll" id="chat-messages">
+
                     {messages.map((message) => (
                         <ul key={message._id}>
                             <li style={message.userUsername == username ? { textAlign: 'right' } : {}}>
@@ -120,6 +123,7 @@ export default function Chat() {
                             </li>
                         </ul>
                     ))}
+                    </div>
                 </section>
 
                 <section className="form">
