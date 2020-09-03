@@ -6,37 +6,51 @@ import io from 'socket.io-client';
 import api from '../../services/api';
 
 import './styles.css';
+import Header from '../../Components/Header';
 
 export default function Chat() {
+    // filters
+    
+    const [filterDate, setFilterDate] = useState('');
+    const [filterUsername, setFilterUsername] = useState('');
+    const [filterOrder, setFilterOrder] = useState('asc');
+    
+    // filters
+    const [order, setOrder] = useState('desc');
+    const [userUsername, setUserUsername] = useState('');
+    const [filters, setFilters] = useState({
+        filterOrder: 'a',
+        filterUsername: '',
+        filterDate: '',
+    });
+
     const [messageContent, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [page, setPage] = useState(20);
-    const history = useHistory();
+
     const ioClient = io.connect("http://10.0.0.108:3333");
-    
+
     // user data
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
-        api.get('messages', {})
+        api.post(`messages`, {filterDate, filterUsername, filterOrder})
             .then(response => {
-                setMessages(response.data.reverse());
+                setMessages(response.data);
             });
     }, []);
 
     useEffect(() => {
         ioClient.on('chat new message', (msg) => {
-            api.get('messages', {})
-            .then(response => {
-                setMessages(response.data.reverse());
-            });
+            api.post('messages', {filterDate, filterUsername, filterOrder})
+                .then(response => {
+                    setMessages(response.data);
+                });
         })
     })
 
     useEffect(() => {
         var objDiv = document.getElementById("chat-messages");
-        console.log(objDiv);
         objDiv.scrollTop = objDiv.scrollHeight;
     })
 
@@ -52,27 +66,49 @@ export default function Chat() {
         }
     }
 
+
+
+    
+    useEffect(() => {
+        api.post(`messages`, {filterDate, filterUsername, filterOrder})
+        .then(response => {
+            setMessages(response.data);
+        });
+
+    }, [filterDate, filterUsername, filterOrder]);
+
     return (
-        <div className="chat-box">
-            <section className="chat-messages" id="chat-messages">
-                {messages.map((message) => (
-                    <ul key={message._id}>
-                        <li><strong>{message.userUsername}</strong> - {message.content}</li>
-                    </ul>
-                ))}
-            </section>
+        <div className="container">
+
+            <input type="date" onChange={e => setFilterDate(e.target.value)}></input>
+            <input type="text" onChange={e => setFilterUsername(e.target.value)} placeholder="Username"></input>
+            {filterOrder == 'asc'
+                ? <button type="button" onClick={e => setFilterOrder(e.target.value)} value='desc'>Crescente</button>
+                : <button type="button" onClick={e => setFilterOrder(e.target.value)} value='asc'>Decrescente</button>
+            }
             
-            <section className="form">
-                <strong>{username}</strong>
-                <form onSubmit={handleMessage}>
-                    <input
-                        placeholder="Digite algo..."
-                        value={messageContent}
-                        onChange={e => setMessage(e.target.value)}
-                    />
-                    <button className="button" type="submit">Enviar</button>
-                </form>
-            </section>
+            <div className="chat-box">
+                <Header handleFilters order={order} userUsername={userUsername} />
+                <section className="chat-messages" id="chat-messages">
+                    {messages.map((message) => (
+                        <ul key={message._id}>
+                            <li><strong>{message.userUsername}</strong> - {message.content}</li>
+                        </ul>
+                    ))}
+                </section>
+
+                <section className="form">
+                    <strong>{username}</strong>
+                    <form onSubmit={handleMessage}>
+                        <input
+                            placeholder="Digite algo..."
+                            value={messageContent}
+                            onChange={e => setMessage(e.target.value)}
+                        />
+                        <button className="button" type="submit">Enviar</button>
+                    </form>
+                </section>
+            </div>
         </div>
     );
 };

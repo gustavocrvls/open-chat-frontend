@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import './styles.css';
 
-export default function Logon() {
+export default function Login() {
   const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
   const history = useHistory();
@@ -21,6 +21,7 @@ export default function Logon() {
 
       localStorage.setItem('userId', response.data._id);
       localStorage.setItem('username', username);
+      localStorage.setItem('userType', response.data.userType);
 
       history.push('/chat');
       

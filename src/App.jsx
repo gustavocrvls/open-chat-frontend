@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './global.css'
 
 import Routes from './routes';
 
+const FilterContext = React.createContext({
+  filterOrder: '',
+  filterUsername: '',
+  filterDate: '',
+});
 
 function App() {
+  useEffect(()=> {
+    console.log(FilterContext);
+  })
   return (
-    <Routes />
+    <FilterContext.Provider>
+      <Routes />
+    </FilterContext.Provider>
   );
 }
 
-export default App;
+export {App as default, FilterContext};
