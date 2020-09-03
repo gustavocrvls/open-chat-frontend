@@ -5,24 +5,15 @@ import io from 'socket.io-client';
 
 import api from '../../services/api';
 
-import './styles.css';
+import './styles.scss';
 import Header from '../../Components/Header';
+import AdminTools from '../../Components/AdminTools';
+import { FiSend } from 'react-icons/fi';
 
 export default function Chat() {
-    // filters
-    
     const [filterDate, setFilterDate] = useState('');
     const [filterUsername, setFilterUsername] = useState('');
     const [filterOrder, setFilterOrder] = useState('asc');
-    
-    // filters
-    const [order, setOrder] = useState('desc');
-    const [userUsername, setUserUsername] = useState('');
-    const [filters, setFilters] = useState({
-        filterOrder: 'a',
-        filterUsername: '',
-        filterDate: '',
-    });
 
     const [messageContent, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -34,7 +25,7 @@ export default function Chat() {
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
-        api.post(`messages`, {filterDate, filterUsername, filterOrder})
+        api.post(`messages`, { filterDate, filterUsername, filterOrder })
             .then(response => {
                 setMessages(response.data);
             });
@@ -42,7 +33,7 @@ export default function Chat() {
 
     useEffect(() => {
         ioClient.on('chat new message', (msg) => {
-            api.post('messages', {filterDate, filterUsername, filterOrder})
+            api.post('messages', { filterDate, filterUsername, filterOrder })
                 .then(response => {
                     setMessages(response.data);
                 });
@@ -67,28 +58,39 @@ export default function Chat() {
     }
 
 
-
-    
     useEffect(() => {
-        api.post(`messages`, {filterDate, filterUsername, filterOrder})
-        .then(response => {
-            setMessages(response.data);
-        });
+        api.post(`messages`, { filterDate, filterUsername, filterOrder })
+            .then(response => {
+                setMessages(response.data);
+            });
 
     }, [filterDate, filterUsername, filterOrder]);
 
     return (
         <div className="container">
 
-            <input type="date" onChange={e => setFilterDate(e.target.value)}></input>
-            <input type="text" onChange={e => setFilterUsername(e.target.value)} placeholder="Username"></input>
-            {filterOrder == 'asc'
-                ? <button type="button" onClick={e => setFilterOrder(e.target.value)} value='desc'>Crescente</button>
-                : <button type="button" onClick={e => setFilterOrder(e.target.value)} value='asc'>Decrescente</button>
-            }
-            
+
             <div className="chat-box">
-                <Header handleFilters order={order} userUsername={userUsername} />
+                <Header>
+                    <AdminTools>
+                        <span className="admin--filter-title">Filtros: </span>
+                        <span className="form-control">
+                            <label htmlFor="filterDate">Data:</label>
+                            <input type="date" onChange={e => setFilterDate(e.target.value)} id="filterDate"></input>
+                        </span>
+                        <span className="form-control">
+                            <label htmlFor="filterUsername">Username:</label>
+                            <input type="text" onChange={e => setFilterUsername(e.target.value)} placeholder="Username" id="filterUsername"></input>
+                        </span>
+                        <span className="form-control">
+                            <label htmlFor="filterOrder">Ordem:</label>
+                            {filterOrder == 'asc'
+                                ? <button type="button" onClick={e => setFilterOrder(e.target.value)} value='desc' id="filterOrder" className="admin--btn">Crescente</button>
+                                : <button type="button" onClick={e => setFilterOrder(e.target.value)} value='asc' id="filterOrder" className="admin--btn">Decrescente</button>
+                            }
+                        </span>
+                    </AdminTools>
+                </Header>
                 <section className="chat-messages" id="chat-messages">
                     {messages.map((message) => (
                         <ul key={message._id}>
@@ -98,14 +100,14 @@ export default function Chat() {
                 </section>
 
                 <section className="form">
-                    <strong>{username}</strong>
+                    <div><strong>{username}</strong></div>
                     <form onSubmit={handleMessage}>
                         <input
                             placeholder="Digite algo..."
                             value={messageContent}
                             onChange={e => setMessage(e.target.value)}
                         />
-                        <button className="button" type="submit">Enviar</button>
+                        <button className="btn-chat" type="submit"><FiSend></FiSend></button>
                     </form>
                 </section>
             </div>

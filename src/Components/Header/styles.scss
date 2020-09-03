@@ -1,0 +1,35 @@
+@import "../../assets/variables.scss";
+
+header {
+  padding: 10px;
+}
+
+.header-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.header-username {
+  color: $btn-color;
+}
+
+.header-login-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .header-button {
+    margin: 2px;
+    height: 30px;
+    width: 30px;
+    border-radius: 3px;
+    border: solid $color-primary 1px;
+    background-color: $btn-color;
+    color: $text-primary;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lighten($color-primary, 10);
+    }
+  }
+}

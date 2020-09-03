@@ -1,0 +1,33 @@
+@import "../../assets/variables.scss";
+
+.admin-tools {
+    display: flex;
+}
+
+.admin--filter-title {
+    margin-right: 20px;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    margin: 2px;
+
+    input {
+        font-size: 14px;
+        padding: 2px;
+        height: 100%;
+        color: $color-primary;
+        // background-color: $bg-color;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .admin--btn {
+        height: 100%;
+        background-color: $btn-color;
+        color: $text-primary;
+        border: none;
+        border-radius: 3px;
+    }
+}

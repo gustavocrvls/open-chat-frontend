@@ -4,7 +4,7 @@ import { FiLogIn } from 'react-icons/fi'
 
 import api from '../../services/api';
 
-import './styles.css';
+import './styles.scss';
 
 export default function Login() {
   const [userId, setUserId] = useState('');
@@ -24,15 +24,16 @@ export default function Login() {
       localStorage.setItem('userType', response.data.userType);
 
       history.push('/chat');
-      
+
     } catch (err) {
-        alert('Falha no login, tente novamente!')
+      alert('Falha no login, tente novamente!')
     }
   }
 
   return (
-    <div className="logon-container">
+    <div className="login-container">
       <section className="form">
+        <h1 className="openchat-title">OpenChat</h1>
         <form onSubmit={handleLogin}>
           <h1>Faça seu login</h1>
 

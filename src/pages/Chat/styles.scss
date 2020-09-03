@@ -1,0 +1,63 @@
+@import "../../assets/variables.scss";
+
+.container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.chat-box {
+    padding: 10px;
+    margin-top: 10px;
+    height: 90vh;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 1px 1px 2px rgb(139, 139, 139);
+    background-color: $bg-color;
+}
+
+.chat-box::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-box section.form {
+    font-size: 16px;
+    padding: 10px;
+    /* position: fixed; */
+    align-self: bottom;
+    width: 100%;
+    max-width: 1100px;
+
+    div {
+        margin-bottom: 5px;
+    }
+
+    input {
+        border: none;
+        height: 23px;
+        font-size: 16px;
+        width: 90%;
+        border-radius: 4px;
+        margin: 0 4px;
+        color: $color-primary;
+    }
+
+    .btn-chat {
+        height: 26px;
+        padding: 1px 10px;
+        background-color: $btn-color;
+        color: $text-primary;
+        border: none;
+        border-radius: 3px;
+    }
+}
+
+.chat-box ul {
+    list-style: none;
+}
+
+.chat-messages {
+    height: 65vh;
+    overflow-y: scroll;
+    border-top: 1px solid darken($bg-color, 10);
+}

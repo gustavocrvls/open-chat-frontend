@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import './global.css'
+import './global.scss'
 
 import Routes from './routes';
 
