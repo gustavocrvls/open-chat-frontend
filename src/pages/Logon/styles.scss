@@ -1,0 +1,54 @@
+@import "../../assets/variables.scss";
+
+.logon-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 90vh;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $color-primary;
+}
+
+.logon-container section.form {
+  text-align: center;
+  width: 100%;
+  margin: auto 30px;
+
+  input {
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid $color-primary;
+    border-radius: 4px 0px 0 4px;
+    color: $color-primary;
+  }
+
+  button {
+    margin-left: -1px;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid $color-primary;
+    border-radius: 0 4px 4px 0;
+    background-color: $color-primary;
+    color: #fff;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lighten($color-primary, 10);
+    }
+
+    &:active {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+.logon-container section.form form h1 {
+  font-size: 16px;
+}
+
+.openchat-title {
+  font-size: 64px;
+}

@@ -9,6 +9,7 @@ import './styles.scss';
 export default function Login() {
   const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
+  const [userType, setUserType] = useState('');
   const history = useHistory();
 
   async function handleLogin(e) {
@@ -43,12 +44,8 @@ export default function Login() {
             onChange={e => setUsername(e.target.value)}
           />
           <button className="button" type="submit">Entrar</button>
-
-          {/* <Link className="back-link" to="/register">
-            <FiLogIn size={16} color="#E02041" />
-            Não tenho cadastro
-          </Link> */}
         </form>
+        não possui usuário? <Link to="/logon">crie um</Link>
       </section>
     </div>
   );
