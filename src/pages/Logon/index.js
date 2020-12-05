@@ -37,10 +37,10 @@ export default function Login() {
                 <h1 className="openchat-title">OpenChat</h1>
                 <form onSubmit={handleLogon}>
                     <h1>Crie seu usuário</h1>
-                    <div>
+                    {/* <div>
                         <input type="radio" value="1" name="gender" onChange={e => { setUserType(e.target.value) }} /> User
                         <input type="radio" value="2" name="gender" onChange={e => { setUserType(e.target.value) }} /> Admin
-                    </div>
+                    </div> */}
 
                     <input
                         placeholder="Usuário"

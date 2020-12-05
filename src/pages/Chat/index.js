@@ -26,8 +26,10 @@ export default function Chat() {
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
+        console.log(filterDate);
         api.post(`messages`, { filterDate, filterUsername, filterOrder })
             .then(response => {
+                console.log(response.data);
                 setMessages(response.data);
             });
     }, []);
@@ -111,7 +113,7 @@ export default function Chat() {
                 <section className="chat-messages">
                     <div className="chat-messages-roll" id="chat-messages">
 
-                    {messages.map((message) => (
+                    {messages && messages.map((message) => (
                         <ul key={message._id}>
                             <li style={message.userUsername == username ? { textAlign: 'right' } : {}}>
                                 <div className="message--header">
